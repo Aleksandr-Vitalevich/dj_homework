@@ -14,3 +14,13 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+class Tag(models.Model) :
+
+    name = models.CharField(max_length=50,verbose_name="Название")
+
+class Scope(models.Model) :
+
+    article = models.ForeignKey(Article,on_delete=models.CASCADE,related_name="scopes")
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE,related_name="scopes")
+    is_main = models.BooleanField(default=False,verbose_name="Основной")
